@@ -48,28 +48,34 @@ issues.push(
         Time: 30
     }
 )
-// let generateIssue = (id) => {
-//     titleLength = Math.round(Math.random() * 3) + 1;
-//     authorCount = Math.round(Math.random() * 4) + 1;
-//     bookAuthors = [];
-//     for (let i = 0; i < authorCount; i++) {
-//         bookAuthors[i] = faker.random.arrayElement(authors);
-//     }
-//     return {
-//         id: id,
-//         title: faker.lorem.words(titleLength),
-//         teaser: faker.lorem.paragraph(),
-//         authors: bookAuthors
-//     }
-// };
-// var books = [];
-// for (let i = 0; i < 10; i++) {
-//     books[i] = generateBook(i);
-// }
+let generateDate = (day, jDate,id) => {
+    let startHour = 9 + Math.floor((jDate * 30)/30);
+    let startMinute = (jDate * 30) % 60;
+    let endMinute = (((jDate * 30)+30) % 60);
+    let endHour = endMinute === 0? startHour + 1 : startHour;
+
+    return {
+        id: id,
+        day: day,
+        start: startHour + '-' + startMinute,
+        end: endHour + '-' + endMinute,
+        booked: Math.round(Math.random()),
+        clerk: faker.random.arrayElement(clerks)
+    }
+};
+var dates = [];
+id=1;
+for (let i = 1; i <= 7; i++) {
+    for (let j = 0; j < 8; j++) {
+        dates.push(generateDate(i, j,id));
+        console.log(generateDate(i, j));
+        id++;
+    }
+}
 
 fs.writeFile(
-    '../../../database.fake.json',
-    JSON.stringify({Users: users, Clerks: clerks, Issues: issues}),
+    '../../database.fake.json',
+    JSON.stringify({Users: users, Clerks: clerks, Issues: issues,Dates: dates}),
     (err) => {
         console.log(err)
     }
