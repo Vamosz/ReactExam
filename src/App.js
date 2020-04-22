@@ -2,23 +2,28 @@ import React from 'react';
 import './App.scss';
 import Navbar from "./Components/Navbar";
 import Issues from "./Components/Issues";
+import BookedItems from "./Components/bookedItems";
 
 function App() {
     return (
         <div>
             <Navbar name={"Government"}/>
             <div className="container-fluid">
-                <div className="row">
-                    <div className="col-4"/>
-                    <div className="col-4 text-center">Choose</div>
-                    <div className="col-4"/>
-                </div>
-                <div className={'row'}>
-                    <div className="col-12">
-                        <Issues/>
+                <div className='row mt-3'>
+                    <div className='col-12'>
+                        <h2>You can select the issues above: </h2>
                     </div>
-
                 </div>
+                <Issues/>
+                <div className='row mt-3'>
+                    <div className='col-2'/>
+                    <div className='col-8'>
+                        <h2>This table collect your selections.</h2>
+                        <BookedItems />
+                    </div>
+                    <div className='col-2'/>
+                </div>
+
             </div>
         </div>
 

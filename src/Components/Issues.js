@@ -27,10 +27,12 @@ class Issues extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="row">
                 {this.issueItems.map((issue)=>{
                     return (
-                        <IssueCard item={issue}/>
+                        <div key={issue.id} className="col-12 col-md-4 mt-4">
+                            <IssueCard item={issue}/>
+                        </div>
                     );
                 })}
             </div>
