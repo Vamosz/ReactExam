@@ -13,7 +13,6 @@ class AppDispatcher extends Dispatcher{
 const dispatcher = new AppDispatcher();
 
 dispatcher.register((action)=>{
-    //console.log(action);
 });
 
 export default dispatcher;

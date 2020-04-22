@@ -11,12 +11,10 @@ class AppointmentStore extends EventEmitter{
 
     addOnChangeListener(callback){
         this.addListener('Change',callback);
-        console.log('add');
     }
 
     removeChangeListener(callback){
         this.removeListener('Change',callback);
-        console.log('remove');
     }
 }
 

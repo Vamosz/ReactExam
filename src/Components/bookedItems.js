@@ -15,7 +15,6 @@ class bookedItems extends React.Component {
         this.setState({
             booked: AppointmentStore._items
         });
-        console.log(this.state.booked);
     }
 
     componentDidMount() {
