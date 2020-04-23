@@ -1,11 +1,13 @@
 import React from 'react'
 import IssueAction from "../Actions/IssueAction";
+import AppointmentStore from '../Stores/AppointmentStore';
 
 class IssueCard extends React.Component {
 
     constructor(props) {
         super(props);
         this.props = props;
+        AppointmentStore._items = [];
         this.state = {
             wasClick: false
         }

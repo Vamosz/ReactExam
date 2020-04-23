@@ -63,12 +63,11 @@ let generateDate = (day, jDate,c, id) => {
     }
 };
 var dates = [];
-id = 1;
+let id = 1;
 for (let i = 1; i <= 7; i++) {
     for (let c = 0; c < clerks.length; c++) {
         for (let j = 0; j < 8; j++) {
             dates.push(generateDate(i, j,c, id));
-            console.log(generateDate(i, j,c, id));
             id++;
         }
     }

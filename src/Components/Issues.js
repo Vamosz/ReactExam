@@ -1,34 +1,34 @@
 import React from 'react'
 import IssueCard from "./IssueCard";
+import AppointmentStore from "../Stores/AppointmentStore";
 
+const axios = require('axios');
 
 class Issues extends React.Component {
 
-    issueItems = [];
-
     constructor(props) {
         super(props);
-        this.issueItems.push({
-            "id": 1,
-            "Name": "Get Married Licence",
-            "Time": 10
-        });
-        this.issueItems.push({
-            "id": 2,
-            "Name": "Birth Certificate",
-            "Time": 20
-        });
-        this.issueItems.push({
-            "id": 3,
-            "Name": "Renew the Driving License",
-            "Time": 30
-        });
+        AppointmentStore._items = [];
+        this.state = {
+            issueItems: []
+        }
+        this.getIssues();
+
     }
 
+    getIssues(){
+        axios.get('http://localhost:3001/Issues')
+            .then((response) => {
+                this.setState({issueItems: response.data});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
     render() {
         return (
             <div className="row">
-                {this.issueItems.map((issue)=>{
+                {this.state.issueItems.map((issue)=>{
                     return (
                         <div key={issue.id} className="col-12 col-md-4 mt-4">
                             <IssueCard item={issue}/>

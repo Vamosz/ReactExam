@@ -5,6 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import App from "./App";
 import {BrowserRouter, Route} from "react-router-dom";
 import TimeTable from "./Components/TimeTable";
+import Booking from "./Components/Booking";
 
 
 
@@ -13,7 +14,8 @@ import TimeTable from "./Components/TimeTable";
 ReactDOM.render(
     <BrowserRouter>
         <Route path="/" exact component={ App }/>
-        <Route path="/timetable/:day" component={ TimeTable }/>
+        <Route path="/timetable" component={ TimeTable }/>
+        <Route path="/booking" component={ Booking }/>
     </BrowserRouter>, document.getElementById('root')
 );
 
