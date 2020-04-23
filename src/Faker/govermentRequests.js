@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-axios.get('http://localhost:3001/authors?country=Congo')
+axios.get('http://localhost:3001/Dates?booked=0&&day=1')
     .then((response) => {
         console.log(response.data)
     })
@@ -12,11 +12,10 @@ axios.post('http://localhost:3001/authors', {name : "Jane Doe", country : "Hunga
     .then((res) => {console.log(res)})
     .catch((err) => {console.log(err)});
 */
-//Yemen-i irok konyvei?
-//TODO: Modify to use 2 AJAX calls. 1st to Query authors, 2nd to filter books;
-axios.get('http://localhost:3001/authors?country=Yemen')
+
+axios.get('http://localhost:3001/Dates?booked=0')
     .then((res) => {
-        res.data.forEach((author) => {
+        res.data.forEach((date) => {
             axios.get('http://localhost:3001/books')
                 .then((respBooks) => {
                     books = respBooks.data.filter((book) => {

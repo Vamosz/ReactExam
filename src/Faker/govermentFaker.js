@@ -26,7 +26,7 @@ for (let i = 0; i < 100; i++) {
 }
 
 let clerks = [];
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 3; i++) {
     let clerk = generateClerk(i);
     clerks.push(clerk);
 }
@@ -48,34 +48,35 @@ issues.push(
         Time: 30
     }
 )
-let generateDate = (day, jDate,id) => {
-    let startHour = 9 + Math.floor((jDate * 30)/30);
-    let startMinute = (jDate * 30) % 60;
-    let endMinute = (((jDate * 30)+30) % 60);
-    let endHour = endMinute === 0? startHour + 1 : startHour;
+let generateDate = (day, jDate,c, id) => {
+    let startHour = 9 + jDate;
+    let endHour = 9 + jDate + 1;
+
 
     return {
         id: id,
         day: day,
-        start: startHour + '-' + startMinute,
-        end: endHour + '-' + endMinute,
-        booked: Math.round(Math.random()),
-        clerk: faker.random.arrayElement(clerks)
+        start: startHour,
+        end: endHour,
+        booked: Math.round(Math.random()+ 0.2) ,
+        clerk: clerks[c]
     }
 };
 var dates = [];
-id=1;
+id = 1;
 for (let i = 1; i <= 7; i++) {
-    for (let j = 0; j < 8; j++) {
-        dates.push(generateDate(i, j,id));
-        console.log(generateDate(i, j));
-        id++;
+    for (let c = 0; c < clerks.length; c++) {
+        for (let j = 0; j < 8; j++) {
+            dates.push(generateDate(i, j,c, id));
+            console.log(generateDate(i, j,c, id));
+            id++;
+        }
     }
 }
 
 fs.writeFile(
     '../../database.fake.json',
-    JSON.stringify({Users: users, Clerks: clerks, Issues: issues,Dates: dates}),
+    JSON.stringify({Users: users, Clerks: clerks, Issues: issues, Dates: dates}),
     (err) => {
         console.log(err)
     }
