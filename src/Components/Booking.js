@@ -15,22 +15,36 @@ class Booking extends React.Component {
         }
     }
 
-    formValidation(){
+    formValidation(start){
         let firstName = document.getElementById('validationServer01').value;
         let lastName = document.getElementById('validationServer02').value;
         let email = document.getElementById('validationServer03').value;
         var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~0123456789]/;
         var emailformat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if(!format.test(firstName) && !format.test(lastName) && emailformat.test(email.toLowerCase())){
+        if(format.test(firstName)){
+            document.getElementById('fnameError').style.display = 'block';
+        }else{
+            document.getElementById('fnameError').style.display = 'none';
+        }
+        if(format.test(lastName)){
+            document.getElementById('lnameError').style.display = 'block';
+        }else{
+            document.getElementById('lnameError').style.display = 'none';
+        }
+        if(!emailformat.test(email.toLowerCase())){
+            document.getElementById('emailError').style.display = 'block';
+       }else{
+            document.getElementById('emailError').style.display = 'none';
+        }
+        if(!format.test(firstName) && !format.test(lastName) && emailformat.test(email.toLowerCase()) && start === true) {
             document.getElementById('alert').style.display = 'block';
             setTimeout(
-                function() {
+                function () {
                     window.location.href = '/';
-                }
-                    .bind(this),
+                },
                 3000
             );
-       }
+        }
     }
 
     render() {
@@ -65,28 +79,31 @@ class Booking extends React.Component {
                             <div className="form-row">
                                 <div className="col-md-5 mb-3">
                                     <label htmlFor="validationServer01">First name</label>
-                                    <input type="text" className="form-control" id="validationServer01"
+                                    <input onChange={()=>this.formValidation(false)} type="text" className="form-control" id="validationServer01"
                                            required/>
+                                    <small id="fnameError" style={{color: 'red',display:'none'}}>The first name must contain only letter.</small>
                                 </div>
                             </div>
                             <div className="form-row">
                                 <div className="col-md-5 mb-3">
                                     <label htmlFor="validationServer02">Last name</label>
-                                    <input type="text" className="form-control" id="validationServer02"
+                                    <input onChange={()=>this.formValidation(false)} type="text" className="form-control" id="validationServer02"
                                            required/>
+                                    <small id={"lnameError"} style={{color: 'red',display:'none'}}>The last name must contain only letter.</small>
                                 </div>
                             </div>
                             <div className="form-row">
                                 <div className="col-md-5 mb-3">
                                     <label htmlFor="validationServer03">Email</label>
-                                    <input type="email" className="form-control" id="validationServer03"
+                                    <input onChange={()=>this.formValidation(false)} type="email" className="form-control" id="validationServer03"
                                            required/>
+                                    <small id={"emailError"} style={{color: 'red',display:'none'}}>The email is not valid.</small>
                                 </div>
                             </div>
                         </form>
                         <div className="form-row">
                             <div className="col-md-4 mb-3">
-                                <button onClick={()=>this.formValidation()} className="btn btn-outline-primary">Book</button>
+                                <button onClick={()=>this.formValidation(true)} className="btn btn-outline-primary">Book</button>
                             </div>
                         </div>
                     </div>
